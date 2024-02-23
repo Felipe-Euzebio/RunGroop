@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RunGroop.Data;
+using RunGroopWebApp.Data;
 
 namespace RunGroop
 {
@@ -19,6 +20,13 @@ namespace RunGroop
 			});
 
 			var app = builder.Build();
+
+			// Seed the database with sample data.
+			if (args.Length == 1 && args[0].ToLower() == "seeddata")
+			{
+				Seed.SeedData(app);
+				//Seed.SeedUsersAndRolesAsync(app);
+			}
 
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment())
