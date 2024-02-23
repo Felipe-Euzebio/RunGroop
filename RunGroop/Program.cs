@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using RunGroop.Data;
+
 namespace RunGroop
 {
 	public class Program
@@ -8,6 +11,12 @@ namespace RunGroop
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+
+			// Add the database context to the container.
+			builder.Services.AddDbContext<AppDbContext>(options =>
+			{
+				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+			});
 
 			var app = builder.Build();
 
